@@ -1,10 +1,11 @@
 import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import BaseLayout from "./pages/BaseLayout.tsx";
+import BaseLayout from "./components/BaseLayout.tsx";
 import React from "react";
-import NotFound from "./pages/NotFound.tsx";
+import NotFound from "./pages/error/NotFound.tsx";
 import Main from "./pages/Main.tsx";
-import Exam from "./pages/Exam.tsx";
+import Exams from "./pages/exam/Exams.tsx";
+import ExamLayout from "./components/ExamLayout.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,11 +17,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/applies",
-    element: <BaseLayout />,
+    path: "/exams",
+    element: <ExamLayout />,
     errorElement: <NotFound />,
     children: [
-      { index: true, element: <Exam /> },
+      { index: true, element: <Exams /> },
       // { path: "/applies/:id", element: <Apply /> },
       // { path: "/applies/create", element: <ApplyCreate /> },
     ],
