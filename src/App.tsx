@@ -6,6 +6,8 @@ import NotFound from "./pages/error/NotFound.tsx";
 import Main from "./pages/Main.tsx";
 import Exams from "./pages/exam/Exams.tsx";
 import ExamLayout from "./components/ExamLayout.tsx";
+import EditorLayout from "@/components/EditorLayout.tsx";
+import QuestionEditor from "@/pages/question/QuestionEditor.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       // { path: "/applies/create", element: <ApplyCreate /> },
     ],
   },
+  {
+    path: "/edit",
+    element: <EditorLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {index : true, element: <QuestionEditor />}
+    ]
+  }
 ]);
 
 const App:React.FC = () => {

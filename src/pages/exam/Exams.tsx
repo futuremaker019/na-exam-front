@@ -1,11 +1,15 @@
 import React from 'react';
+import Answer from "./Answer.tsx";
 
 const Exams:React.FC = () => {
     return (
-        <div className={"flex flex-col"}>
-            <button className="btn btn-neutral">Neutral</button>
-            <button className="btn btn-primary">Button</button>
-
+        <div className="h-[100vh]">
+            <div className="bg-fuchsia-600 h-[10vh]"></div>
+            <div className="flex h-[85vh]">
+                <div className="bg-amber-600 flex-1">라라라</div>
+                <Answer />
+            </div>
+            <div className={"bg-blue-300 h-[5vh]"}></div>
         </div>
     );
 };

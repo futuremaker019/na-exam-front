@@ -1,0 +1,40 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: carenet-front CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Install dependencies and Build Vite
+        run: |
+          npm install
+          npm run build
+      - name: Log in to Docker hub
+        uses: docker/login-actions@v3
+        with:
+          username: ${{ secret.DOCKER_USERNAME }}
+          password: ${{ secret.DOKCER_PASSWORD }}
+      - name: Build Docker image
+        run: |
+          docker build -t futuremaker019/carenet-front:${{ github.sha }}
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push futuremaker019/carenet-front:${{ github.sha }}
+      - name: Set image tag to 'latest'
+        run: |
+          docker tag futuremaker019/carenet-front:${{ github.sha }} futuremaker019/carenet-front:latest
+          docker push futuremaker019/carenet-front:latest
