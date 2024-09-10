@@ -27,7 +27,7 @@ jobs:
         uses: docker/login-actions@v3
         with:
           username: ${{ secret.DOCKER_USERNAME }}
-          password: ${{ secret.DOKCER_PASSWORD }}
+          password: ${{ secret.DOCKER_PASSWORD }}
       - name: Build Docker image
         run: |
           docker build -t futuremaker019/carenet-front:${{ github.sha }}
